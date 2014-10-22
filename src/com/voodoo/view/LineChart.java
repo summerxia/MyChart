@@ -326,11 +326,13 @@ public class LineChart extends View{
 		float stopX = 0f;
 		float stopY =0f;
 		
-		for(int i = 0; i < lines.size(); i++){
+		for(int i = 0; i < lines.size(); i++){  
 			LineEntity line = lines.get(i);
 			mPaint.setColor(line.getLineColor());
 			Map<Float,Integer> data = line.getLineData();
 			List<Integer> values = new ArrayList<Integer>(data.values());
+			List<Float> keys = new ArrayList<Float>(data.keySet());
+			//Set<Float> keys = data.keySet();
 			float max = 0.0f, min = Float.MAX_VALUE;
 			for(int j = 0; j < values.size(); j++){
 				float element = (float)values.get(j);
@@ -339,10 +341,15 @@ public class LineChart extends View{
 				if(element < min)
 					min = element;
 			}
-			//Log.d(TAG, "max " + max);
 			float range = max - min;
+			
+			startX= axisMarginLeft + (keys.get(0) / ((float)axisXTitles.size() - 1.0f)) * xLength;
+			startY = super.getHeight() - axisMarginBottom - ((values.get(0) - min) / range) * yLength;
+			
+			//Log.d(TAG, "max " + max);
+			
 			Log.d(TAG, "range" + range);
-			for(Float key : data.keySet()){
+			for(Float key : keys){
 				//Log.d("key", key.toString());
 				float value = (float)data.get(key);
 				//Log.d("value", value + "");
