@@ -177,7 +177,7 @@ public class LineChart extends View{
 		drawAxisGridY(canvas);
 		drawLine(canvas);
 		
-	}
+	}        
 	
 	/**
 	 * 绘制X轴

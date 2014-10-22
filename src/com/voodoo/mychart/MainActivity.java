@@ -68,7 +68,7 @@ public class MainActivity extends ActionBarActivity {
         chart.setAxisXTitles(xTitle);
         chart.setAxisYTitles(yTitle);
     }
-    @Override
+    @Override  
     protected void onResume() {
 //    	if(getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
 //			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
