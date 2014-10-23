@@ -146,7 +146,20 @@ public class LineChart extends View{
 
 	/** 纵轴刻度**/
 	private List<String> axisYTitles;
+	
+	/** 警戒血压值**/
+	private float alertBloodPressure = 220.0f;
+	/** 最大脉搏值 **/
+	//private int maxPluse = 200;
+	
+	private boolean isShowAlertLine = true;
+	
 
+	/**最小血压值**/
+	private float minBloodPressure = Float.MAX_VALUE;
+	
+	/**最大血压值**/
+	private float maxBloodPressure = 0.0f;
 	
 	
 
@@ -171,11 +184,17 @@ public class LineChart extends View{
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
 
+		calMaxAndMin(lines);
+		calYTitle();
+		
 		drawXAxis(canvas);
 		drawYAxis(canvas);
 		drawAxisGridX(canvas);
 		drawAxisGridY(canvas);
 		drawLine(canvas);
+		if(isShowAlertLine){
+			drawAlertLine(canvas);
+		}
 		
 	}        
 	
@@ -333,29 +352,21 @@ public class LineChart extends View{
 			List<Integer> values = new ArrayList<Integer>(data.values());
 			List<Float> keys = new ArrayList<Float>(data.keySet());
 			//Set<Float> keys = data.keySet();
-			float max = 0.0f, min = Float.MAX_VALUE;
-			for(int j = 0; j < values.size(); j++){
-				float element = (float)values.get(j);
-				if(element > max)
-					max = element;
-				if(element < min)
-					min = element;
-			}
-			float range = max - min;
+			
+			float range = (float)(maxBloodPressure - minBloodPressure);
 			
 			startX= axisMarginLeft + (keys.get(0) / ((float)axisXTitles.size() - 1.0f)) * xLength;
-			startY = super.getHeight() - axisMarginBottom - ((values.get(0) - min) / range) * yLength;
+			startY = super.getHeight() - axisMarginBottom - ((values.get(0) - minBloodPressure) / range) * yLength;
 			
 			//Log.d(TAG, "max " + max);
-			
-			Log.d(TAG, "range" + range);
+			//Log.d(TAG, "range" + range);
 			for(Float key : keys){
 				//Log.d("key", key.toString());
 				float value = (float)data.get(key);
 				//Log.d("value", value + "");
 				stopX = axisMarginLeft + (key / ((float)axisXTitles.size() - 1.0f)) * xLength;
 				//Log.d("stopX", value + "");
-				stopY = super.getHeight() - axisMarginBottom - ((value - min) / range) * yLength;
+				stopY = super.getHeight() - axisMarginBottom - ((value - minBloodPressure) / range) * yLength;
 				//Log.d("stopY", value + "");
 				canvas.drawLine(startX, startY, stopX, stopY, mPaint);
 				startX = stopX;
@@ -364,8 +375,56 @@ public class LineChart extends View{
 		}
 	}
 	
+	private void drawAlertLine(Canvas canvas){
+		float yLength = super.getHeight() - axisMarginBottom - 2 * axisMarginTop;
+		float range = maxBloodPressure - minBloodPressure;
+		
+		
+		float startX = axisMarginLeft;
+		float startY = super.getHeight() - axisMarginBottom - ((alertBloodPressure - minBloodPressure) / range) * yLength;
+		float stopX = super.getWidth();
+		float stopY = startY;
+		Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+		mPaint.setColor(Color.RED);
+		mPaint.setPathEffect(dashEffect);
+		canvas.drawLine(startX, startY, stopX, stopY, mPaint);
+	}
+	
+	
 	
 
+	private void calMaxAndMin(List<LineEntity> lines){
+		int max = 0;
+		int min = Integer.MAX_VALUE;
+		for(LineEntity line : lines){
+			List<Integer> datas = new ArrayList<Integer>(line.getLineData().values());
+			for(int element : datas){
+				if(element > max){
+					max = element;
+				}
+				if(element < min){
+					min = element;
+				}
+			}
+			if(maxBloodPressure < max){
+				maxBloodPressure = max;
+			}
+			if(minBloodPressure > min){
+				minBloodPressure = min;
+			}
+		}
+	}
+	
+	private void calYTitle(){
+		axisYTitles.clear();
+		for(int i = (int) minBloodPressure; i <= maxBloodPressure; i+=10){
+			axisYTitles.add("" + i);
+		}
+		if(maxBloodPressure < 140){
+			isShowAlertLine = false;
+		}
+	}
+	
 	
 	
 	
@@ -447,7 +506,21 @@ public class LineChart extends View{
 	public void setAxisYColor(int axisYColor) {
 		this.axisYColor = axisYColor;
 	}
+
+	public boolean isShowAlertLine() {
+		return isShowAlertLine;
+	}
+
+	public void setShowAlertLine(boolean isShowAlertLine) {
+		this.isShowAlertLine = isShowAlertLine;
+	}
 	
 	
-	
+	public float getAlertBloodPressure() {
+		return alertBloodPressure;
+	}
+
+	public void setAlertBloodPressure(float alertBloodPressure) {
+		this.alertBloodPressure = alertBloodPressure;
+	}
 }

@@ -33,7 +33,7 @@ public class MainActivity extends ActionBarActivity {
         }
         
         Map<Float,Integer> map = new TreeMap<Float,Integer>();
-        map.put(0.5f, 200);
+        map.put(0.5f, 210);
         map.put(1.0f, 210);
         map.put(1.3f, 227);
         map.put(2.4f, 215);
@@ -43,7 +43,7 @@ public class MainActivity extends ActionBarActivity {
         
         Map<Float,Integer> map1 = new TreeMap<Float,Integer>();
         map1.put(0.0f, 200);
-        map1.put(1.2f, 220);
+        map1.put(1.2f, 190);
         map1.put(1.5f, 217);
         map1.put(2.0f, 230);
         map1.put(3.5f, 225);
