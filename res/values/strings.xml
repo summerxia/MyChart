@@ -4,5 +4,10 @@
     <string name="app_name">MyChart</string>
     <string name="tv_lineChartName">LineChart</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_line">LineActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

@@ -14,7 +14,6 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 
 public class LineChart extends View{
@@ -163,7 +162,7 @@ public class LineChart extends View{
 	
 	
 
-	private final String TAG = "-------LineChart-----------";
+//	private final String TAG = "-------LineChart-----------";
 	
 	private List<LineEntity> lines;
 	
