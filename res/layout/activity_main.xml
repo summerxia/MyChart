@@ -1,8 +1,47 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#cccccc"
+    android:orientation="vertical"
     tools:context="com.voodoo.mychart.MainActivity" >
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/logo"
+        android:contentDescription="@string/app_name"
+        android:gravity="center"
+        android:text="@string/tv_logo"
+        android:textColor="#FFFFFF"
+        android:textSize="80sp" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" >
+
+        <Button
+            android:id="@+id/btn_chart"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginLeft="@dimen/btn_margin"
+            android:padding="10dp"
+            android:text="@string/btn_chart"
+            android:textColor="#FFFFFF" 
+            android:background="#CCFF99"
+            android:textSize="20sp"/>
+        
+        <Button
+            android:id="@+id/btn_table"
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginLeft="@dimen/btn_margin"
+            android:background="@drawable/rect_buttom"
+            android:padding="10dp"
+            android:text="@string/btn_table"
+            android:textColor="#FFFFFF" 
+            android:textSize="20sp"/>
+    </LinearLayout>
+
+</LinearLayout>

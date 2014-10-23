@@ -45,8 +45,7 @@ public class LineActivity extends ActionBarActivity {
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
-		mSectionsPagerAdapter = new SectionsPagerAdapter(
-				getSupportFragmentManager());
+		mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
@@ -91,7 +90,6 @@ public class LineActivity extends ActionBarActivity {
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
 			return 2;
 		}
 
