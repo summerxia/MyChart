@@ -30,6 +30,16 @@ public class MainActivity extends Activity {
 				getApplication().startActivity(intent);
 			}
 		});
+        
+        btnTable.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, TableActivity.class);
+				intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				getApplicationContext().startActivity(intent);
+			}
+		});
        
         
     }

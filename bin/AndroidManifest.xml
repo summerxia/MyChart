@@ -26,6 +26,10 @@
             android:name=".LineActivity"
             android:label="@string/title_activity_line" >
         </activity>
+        <activity
+            android:name=".TableActivity"
+            android:label="@string/title_activity_table" >
+        </activity>
     </application>
 
 </manifest>
